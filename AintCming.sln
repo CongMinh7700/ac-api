@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "two", "two", "{84FE6BB2-1DB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcsg.Weather.One", "one\Mcsg.Weather.One\Mcsg.Weather.One.csproj", "{731302E5-2214-09CC-2072-154E6FA7E1F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcsg.Weather.two", "two\Mcsg.Weather.two\Mcsg.Weather.two.csproj", "{918C6828-51FB-F630-F0BF-0E350B3E3874}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mcsg.Weather.Two", "two\Mcsg.Weather.two\Mcsg.Weather.Two.csproj", "{918C6828-51FB-F630-F0BF-0E350B3E3874}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -21,7 +21,7 @@ namespace Mcsg.Weather.Two
                 options.AddPolicy("AllowReact",
                     builder =>
                     {
-                        builder.WithOrigins("http://ubtservice02", "http://localhost");
+                        builder.WithOrigins("http://ubtservicedev", "http://localhost");
                         builder.AllowAnyOrigin()  // Trong production nên specify domain cụ thể
                                .AllowAnyHeader()
                                .AllowAnyMethod();
