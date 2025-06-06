@@ -1,0 +1,14 @@
+[Unit]
+Description=Weather Two API Service
+After=network.target
+
+[Service]
+WorkingDirectory=/home/deployer/ac-api/publish
+ExecStart=/usr/bin/dotnet /home/deployer/ac-api/publish/Mcsg.Weather.Two.dll
+Restart=always
+RestartSec=5
+SyslogIdentifier=weather-two
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target

@@ -46,8 +46,7 @@ pipeline {
             }
         }
 
-        // 🔁 Tách upload file service riêng ra trước
-        stage('Upload Service File') {
+        stage('Upload Service Files') {
             steps {
                 script {
                     sshPublisher(
@@ -56,7 +55,11 @@ pipeline {
                                 configName: 'UbtServiceDev',
                                 transfers: [
                                     sshTransfer(
-                                        sourceFiles: 'ac-api.service',
+                                        sourceFiles: 'weather-one.service',
+                                        remoteDirectory: "${env.DEPLOY_PATH}"
+                                    ),
+                                    sshTransfer(
+                                        sourceFiles: 'weather-two.service',
                                         remoteDirectory: "${env.DEPLOY_PATH}"
                                     )
                                 ],
@@ -68,7 +71,6 @@ pipeline {
             }
         }
 
-        // 🔁 Sau đó mới upload build + deploy
         stage('Deploy') {
             steps {
                 script {
@@ -85,10 +87,15 @@ pipeline {
                                             cd ${env.DEPLOY_PATH} &&
                                             tar -xzf api-publish.tar.gz &&
                                             rm api-publish.tar.gz &&
-                                            sudo mv ac-api.service /etc/systemd/system/ac-api.service &&
+                                            
+                                            sudo mv weather-one.service /etc/systemd/system/weather-one.service &&
+                                            sudo mv weather-two.service /etc/systemd/system/weather-two.service &&
+                                            
                                             sudo systemctl daemon-reload &&
-                                            sudo systemctl enable ac-api.service &&
-                                            sudo systemctl restart ac-api.service
+                                            sudo systemctl enable weather-one.service &&
+                                            sudo systemctl enable weather-two.service &&
+                                            sudo systemctl restart weather-one.service &&
+                                            sudo systemctl restart weather-two.service
                                         """.stripIndent(),
                                         execTimeout: 300000
                                     )
@@ -104,10 +111,10 @@ pipeline {
 
     post {
         success {
-            echo 'API Deployment successful!'
+            echo '✅ API Deployment successful!'
         }
         failure {
-            echo 'API Deployment failed!'
+            echo '❌ API Deployment failed!'
         }
         always {
             cleanWs()
