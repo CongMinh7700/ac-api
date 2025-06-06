@@ -1,0 +1,6 @@
+@Mcsg.Weather.two_HostAddress = http://localhost:5166
+
+GET {{Mcsg.Weather.two_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
