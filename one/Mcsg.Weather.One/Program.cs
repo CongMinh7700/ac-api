@@ -14,16 +14,30 @@ namespace Mcsg.Weather.One
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.WebHost.UseUrls("http://0.0.0.0:5001");
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReact",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://ubtservice02", "http://localhost");
+                        builder.AllowAnyOrigin()  // Trong production nên specify domain cụ thể
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowReact");
 
             app.UseAuthorization();
 
