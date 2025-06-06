@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mcsg.Weather.two.Controllers
+namespace Mcsg.Weather.Two.Controllers
 {
     [ApiController]
     [Route("[controller]")]

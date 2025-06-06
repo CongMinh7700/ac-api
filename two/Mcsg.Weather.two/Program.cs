@@ -1,5 +1,5 @@
 
-namespace Mcsg.Weather.two
+namespace Mcsg.Weather.Two
 {
     public class Program
     {
