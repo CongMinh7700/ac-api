@@ -4,14 +4,14 @@ pipeline {
     environment {
         DOTNET_CLI_HOME = "C:\\Program Files\\dotnet"
         PATH = "${DOTNET_CLI_HOME};${env.PATH}"
-        DEPLOY_PATH = 'weather-api/publish'
+        DEPLOY_PATH = 'ac-api/publish'
     }
 
     stages {
         stage('Clone Source') {
             steps {
                 git credentialsId: 'CongMinh7700', 
-                    url: 'https://github.com/CongMinh1310/weather-api.git', 
+                    url: 'https://github.com/CongMinh7700/ac-api.git', 
                     branch: 'main'
             }
         }
@@ -56,7 +56,7 @@ pipeline {
                                 configName: 'UbtServiceDev',
                                 transfers: [
                                     sshTransfer(
-                                        sourceFiles: 'weather-api.service',
+                                        sourceFiles: 'ac-api.service',
                                         remoteDirectory: "${env.DEPLOY_PATH}"
                                     )
                                 ],
@@ -85,10 +85,10 @@ pipeline {
                                             cd ${env.DEPLOY_PATH} &&
                                             tar -xzf api-publish.tar.gz &&
                                             rm api-publish.tar.gz &&
-                                            sudo mv weather-api.service /etc/systemd/system/weather-api.service &&
+                                            sudo mv ac-api.service /etc/systemd/system/ac-api.service &&
                                             sudo systemctl daemon-reload &&
-                                            sudo systemctl enable weather-api.service &&
-                                            sudo systemctl restart weather-api.service
+                                            sudo systemctl enable ac-api.service &&
+                                            sudo systemctl restart ac-api.service
                                         """.stripIndent(),
                                         execTimeout: 300000
                                     )
